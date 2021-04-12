@@ -1,15 +1,20 @@
 {
   "name": "mini-notifier",
-  "version": "0.1.1",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview"
   },
+  "files": ["dist"],
   "author": "Lhapaipai",
   "module": "dist/mini-notifier.es.js",
   "main": "dist/mini-notifier.umd.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lhapaipai/mini-notifier.git"
+  },
   "devDependencies": {
     "sass": "^1.32.8",
     "vite": "^2.1.5"
