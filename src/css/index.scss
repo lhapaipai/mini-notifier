@@ -1,0 +1,82 @@
+@import "variables.scss";
+@import "animation.scss";
+@import "form.scss";
+
+.pentatrion-notifies {
+  position: absolute;
+  &.fixed {
+    position: fixed;
+  }
+  z-index: 20;
+  bottom: 20px;
+  left: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+/* Default notification styles */
+.pentatrion-notify {
+  * {
+      box-sizing: content-box;
+
+  }
+
+   position: relative;
+   width: 220px;
+   margin-top: 15px;
+   padding: 20px;
+   background: #fff;
+   box-shadow: 0 11px 17px 0 rgba(23,32,61,.13), 0 0 2px #bbb;
+   border-radius: 5px;
+   font-size: 14px;
+   line-height: 1.4em;
+   word-wrap: break-word;
+  border-top: 3px solid $yellow;
+
+  &--success {
+      background: $greenLight !important;
+      border-top: 3px solid $green;
+  }
+
+  &--error {
+      background: $redLight !important;
+      border-top: 3px solid $red;
+  }
+
+  &__cross {
+
+       position: absolute;
+       top: 5px;
+       right: 2px;
+       width: 20px;
+       height: 20px;
+       opacity: 0.54;
+       cursor: pointer;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:hover {
+          opacity: .7;
+      }
+      &:active {
+          opacity: 1;
+      }
+  }
+
+  /* Confirm buttons */
+
+  &__btns-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    margin-top: 5px;
+    justify-content: space-around;
+
+    > :first-child {
+      margin-right: 10px;
+    }
+
+    > .form-input {
+      width: 0;
+      flex: 1;
+    }
+  }
+}

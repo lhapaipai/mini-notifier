@@ -1,0 +1,22 @@
+
+$yellow: #ffea66 !default;
+$yellowDark: #eac800;
+
+$red: #dc3545 !default;
+$redLight: #f8d7da !default;
+$green: #2b5229 !default;
+$greenLight: #e1fae1 !default;
+
+$extraLightGray: #eee;
+$lightGray: #ddd;
+$gray: #999;
+$blackLight: #333;
+
+$borderRadius: .25rem;
+
+$ringShadow: 0 0 0px 3px #eee;
+$shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+
+@mixin transition-input {
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}

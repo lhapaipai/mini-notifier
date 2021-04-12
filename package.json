@@ -1,0 +1,17 @@
+{
+  "name": "mini-notifier",
+  "version": "0.1.1",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "author": "Lhapaipai",
+  "module": "dist/mini-notifier.es.js",
+  "main": "dist/mini-notifier.umd.js",
+  "devDependencies": {
+    "sass": "^1.32.8",
+    "vite": "^2.1.5"
+  }
+}
