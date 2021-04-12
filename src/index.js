@@ -1,8 +1,7 @@
 import './css/index.scss';
 import * as draw from './draw';
 
-const bounceInClass = 'pentatrion-notify--bounce-in';
-// const bounceInClass = 'pentatrion-notify--translate-in';
+const bounceInClass = 'pentation-notification--bounce-in';
 
 let wrappers_ = [];
 
@@ -23,43 +22,35 @@ function prepare_(container = document.body) {
   return wrapper;
 }
 
-function show(message = '', options = {}) {
+export function notify(message = '', options = {}) {
 
-  // On construit un élément _wrapper dans document.body
   let wrapper = prepare_(options.target);
 
   const time = options.time || 5000;
 
-  let notify = draw.alert(message, options);
-  // notify : elt DOM du conteneur
+  let elt = draw.alert(message, options);
   window.setTimeout(function () {
-    notify.remove();
+    elt.remove();
   }, time);
 
-  wrapper.appendChild(notify);
-  notify.classList.add(bounceInClass);
+  wrapper.appendChild(elt);
+  elt.classList.add(bounceInClass);
 }
 
-function confirm(message = '', options = {}) {
+export function confirm(message = '', options = {}) {
   let wrapper = prepare_(options.target);
 
-  let notify = draw.confirm(message, options);
+  let elt = draw.confirm(message, options);
 
-  wrapper.appendChild(notify);
-  notify.classList.add(bounceInClass);
+  wrapper.appendChild(elt);
+  elt.classList.add(bounceInClass);
 }
 
-function prompt(message = '', options = {}) {
+export function prompt(message = '', options = {}) {
   let wrapper = prepare_(options.target);
 
-  let notify = draw.prompt(message, options);
+  let elt = draw.prompt(message, options);
 
-  wrapper.appendChild(notify);
-  notify.classList.add(bounceInClass);
+  wrapper.appendChild(elt);
+  elt.classList.add(bounceInClass);
 }
-
-export default {
-  show,
-  confirm,
-  prompt
-};

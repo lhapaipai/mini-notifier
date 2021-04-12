@@ -1,4 +1,4 @@
-# MiniNotifier
+# miniNotifier
 
 Show notification, confirmation, prompt
 
@@ -16,22 +16,21 @@ npm install mini-notifier
 ```
 
 ```js
-import miniNotifier from 'mini-notifier';
+import { notify, prompt, confirm } from 'mini-notifier';
 import 'mini-notifier/dist/style.css';
 ```
 
-
 ```js
-miniNotifier.show('hello world');
+miniNotifier.notify('hello world');
 
-miniNotifier.show(message, {
+miniNotifier.notify(message, {
   time: 5000,
   style: 'success|error'
 });
 
 miniNotifier.confirm('Are you sure ?', {
   okText: 'Yes',
-  cancelText: 'Oh, wait',
+  cancelText: 'Sorry, no',
   okHandler: () => console.log('ok'),
   cancelHandler: () => console.log('cancel')
 });
@@ -44,7 +43,7 @@ miniNotifier.prompt('Enter your email', {
   placeholder: 'team@ifmo.su'
 })
 
-miniNotifier.show('hello world', {
+miniNotifier.notify('hello world', {
   target: document.querySelector('#box')
 });
 ```

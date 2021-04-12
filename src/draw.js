@@ -1,8 +1,8 @@
 const CSS_ = {
-  wrapper: 'pentatrion-notifies',
-  notification: 'pentatrion-notify',
-  crossBtn: 'pentatrion-notify__cross',
-  btnsWrapper: 'pentatrion-notify__btns-wrapper'
+  wrapper: 'pentation-notifications',
+  notification: 'pentation-notification',
+  crossBtn: 'pentation-notification__cross',
+  btnsWrapper: 'pentation-notification__btns'
 };
 
 const alert = function alert(message, options) {

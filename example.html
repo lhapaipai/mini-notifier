@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="/dist/style.css">
   <style>
     body {
       margin: 50px;
@@ -34,31 +35,31 @@
     <h2>Box</h2>
     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non praesentium voluptatum incidunt molestias delectus perspiciatis! Officia, soluta veritatis quae aliquam ad totam odio cum aliquid magni laudantium voluptate maiores dolore!</p>
   </div>
-  <script type="module">
-    import { notify, prompt, confirm } from './src/index.js';
+  <script src="/dist/mini-notifier.umd.js"></script>
+  <script>
 
     document.querySelector('#notification-1').addEventListener('click', () => {
-      notify('hello world');
+      miniNotifier.notify('hello world');
     });
     document.querySelector('#notification-2').addEventListener('click', () => {
-      notify('hello world hello world hello world hello world hello world hello world hello world hello world', {
+      miniNotifier.notify('hello world hello world hello world hello world hello world hello world hello world hello world', {
         time: 500000,
       });
     });
     document.querySelector('#notification-3').addEventListener('click', () => {
-      notify('hello world', {
+      miniNotifier.notify('hello world', {
         time: 500000,
         style: 'success'
       });
     });
     document.querySelector('#notification-4').addEventListener('click', () => {
-      notify('hello world', {
+      miniNotifier.notify('hello world', {
         time: 500000,
         style: 'error'
       });
     });
     document.querySelector('#notification-5').addEventListener('click', () => {
-      confirm('hello world', {
+      miniNotifier.confirm('hello world', {
         okText: 'Valider',
         cancelText: 'Annuler',
         okHandler: () => console.log('ok'),
@@ -74,7 +75,7 @@
       })
     });
     document.querySelector('#notification-7').addEventListener('click', () => {
-      notify('hello world', {
+      miniNotifier.notify('hello world', {
         time: 500000,
         target: document.querySelector('#box')
       });
