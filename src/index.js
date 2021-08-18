@@ -1,7 +1,7 @@
-import './css/index.scss';
-import * as draw from './draw';
+import "./css/index.scss";
+import * as draw from "./draw";
 
-const bounceInClass = 'pentation-notification--bounce-in';
+const bounceInClass = "pentation-notification--bounce-in";
 
 let wrappers_ = [];
 
@@ -13,8 +13,8 @@ function prepare_(container = document.body) {
   let wrapper = draw.getWrapper();
 
   if (container === document.body) {
-    wrapper.classList.add('fixed')
-  };
+    wrapper.classList.add("fixed");
+  }
   let length = wrappers_.push(wrapper);
   container.dataset.miniNotifier = length - 1;
   container.appendChild(wrapper);
@@ -22,8 +22,7 @@ function prepare_(container = document.body) {
   return wrapper;
 }
 
-export function notify(message = '', options = {}) {
-
+export function notify(message = "", options = {}) {
   let wrapper = prepare_(options.target);
 
   const time = options.time || 5000;
@@ -37,7 +36,7 @@ export function notify(message = '', options = {}) {
   elt.classList.add(bounceInClass);
 }
 
-export function confirm(message = '', options = {}) {
+export function confirm(message = "", options = {}) {
   let wrapper = prepare_(options.target);
 
   let elt = draw.confirm(message, options);
@@ -46,7 +45,7 @@ export function confirm(message = '', options = {}) {
   elt.classList.add(bounceInClass);
 }
 
-export function prompt(message = '', options = {}) {
+export function prompt(message = "", options = {}) {
   let wrapper = prepare_(options.target);
 
   let elt = draw.prompt(message, options);
