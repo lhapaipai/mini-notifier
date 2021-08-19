@@ -1,10 +1,26 @@
-import { resolve } from 'path';
+import { defineConfig } from "vite";
+import path from "path";
+import typescript from "@rollup/plugin-typescript";
 
-export default {
+const resolvePath = (str) => path.resolve(__dirname, str);
+
+export default defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.js'),
-      name: 'miniNotifier'
-    }
-  }
-};
+      entry: resolvePath("src/index.ts"),
+      name: "miniNotifier",
+    },
+    rollupOptions: {
+      plugins: [
+        typescript({
+          rootDir: resolvePath("./src"),
+          declaration: true,
+          declarationDir: resolvePath("./dist"),
+          exclude: resolvePath("./node_modules/**"),
+          allowSyntheticDefaultImports: true,
+        }),
+      ],
+    },
+    sourcemap: true,
+  },
+});

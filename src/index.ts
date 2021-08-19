@@ -3,7 +3,7 @@ import * as draw from "./draw";
 
 const bounceInClass = "pentation-notification--bounce-in";
 
-let wrappers_ = [];
+let wrappers_: HTMLElement[] = [];
 
 function prepare_(container = document.body) {
   if (container.dataset.miniNotifier) {
@@ -16,13 +16,13 @@ function prepare_(container = document.body) {
     wrapper.classList.add("fixed");
   }
   let length = wrappers_.push(wrapper);
-  container.dataset.miniNotifier = length - 1;
+  container.dataset.miniNotifier = (length - 1).toString();
   container.appendChild(wrapper);
 
   return wrapper;
 }
 
-export function notify(message = "", options = {}) {
+export function notify(message = "", options: NotifyOptions = {}) {
   let wrapper = prepare_(options.target);
 
   const time = options.time || 5000;
@@ -36,7 +36,7 @@ export function notify(message = "", options = {}) {
   elt.classList.add(bounceInClass);
 }
 
-export function confirm(message = "", options = {}) {
+export function confirm(message = "", options: ConfirmOptions = {}) {
   let wrapper = prepare_(options.target);
 
   let elt = draw.confirm(message, options);
@@ -45,7 +45,7 @@ export function confirm(message = "", options = {}) {
   elt.classList.add(bounceInClass);
 }
 
-export function prompt(message = "", options = {}) {
+export function prompt(message = "", options: PromptOptions = {}) {
   let wrapper = prepare_(options.target);
 
   let elt = draw.prompt(message, options);

@@ -5,7 +5,7 @@ const CSS_ = {
   btnsWrapper: "pentation-notification__btns",
 };
 
-const alert = function alert(message, options) {
+const alert = function alert(message: string, options: NotifyOptions = {}) {
   let notify = document.createElement("DIV"),
     cross = document.createElement("DIV"),
     style = options.style;
@@ -14,7 +14,7 @@ const alert = function alert(message, options) {
   svgCross.innerHTML =
     '<path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path>';
   svgCross.setAttribute("viewBox", "0 0 352 512");
-  svgCross.setAttribute("height", 15);
+  svgCross.setAttribute("height", "15");
   cross.append(svgCross);
   notify.classList.add(CSS_.notification);
 
@@ -32,7 +32,10 @@ const alert = function alert(message, options) {
   return notify;
 };
 
-const confirm = function confirm(message, options) {
+const confirm = function confirm(
+  message: string,
+  options: ConfirmOptions = {}
+) {
   let notify = alert(message, options),
     btnsWrapper = document.createElement("div"),
     okBtn = document.createElement("button"),
@@ -51,7 +54,7 @@ const confirm = function confirm(message, options) {
 
   if (cancelHandler && typeof cancelHandler === "function") {
     cancelBtn.addEventListener("click", cancelHandler);
-    crossBtn.addEventListener("click", cancelHandler);
+    crossBtn && crossBtn.addEventListener("click", cancelHandler);
   }
 
   if (okHandler && typeof okHandler === "function") {
@@ -69,7 +72,7 @@ const confirm = function confirm(message, options) {
   return notify;
 };
 
-const prompt = function prompt(message, options) {
+const prompt = function prompt(message: string, options: PromptOptions = {}) {
   options.style = "prompt";
   let notify = alert(message, options),
     btnsWrapper = document.createElement("form"),
@@ -98,7 +101,7 @@ const prompt = function prompt(message, options) {
   }
 
   if (cancelHandler && typeof cancelHandler === "function") {
-    crossBtn.addEventListener("click", cancelHandler);
+    crossBtn && crossBtn.addEventListener("click", cancelHandler);
   }
 
   btnsWrapper.addEventListener("submit", function (e) {
@@ -110,7 +113,7 @@ const prompt = function prompt(message, options) {
 
   if (okHandler && typeof okHandler === "function") {
     okBtn.addEventListener("click", function () {
-      okHandler(input.value);
+      okHandler!(input.value);
     });
   }
 

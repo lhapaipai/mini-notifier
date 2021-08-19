@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,9 +10,11 @@
     body {
       margin: 50px;
     }
+
     .btns button {
       margin: .5rem .5rem;
     }
+
     #box {
       position: relative;
       margin: 50px 0;
@@ -20,6 +23,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="btns">
     <button id="notification-1">Notification (time 5s)</button>
@@ -32,10 +36,12 @@
   </div>
   <div id="box">
     <h2>Box</h2>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non praesentium voluptatum incidunt molestias delectus perspiciatis! Officia, soluta veritatis quae aliquam ad totam odio cum aliquid magni laudantium voluptate maiores dolore!</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non praesentium voluptatum incidunt molestias delectus
+      perspiciatis! Officia, soluta veritatis quae aliquam ad totam odio cum aliquid magni laudantium voluptate maiores
+      dolore!</p>
   </div>
   <script type="module">
-    import { notify, prompt, confirm } from './src/index.js';
+    import { notify, prompt, confirm } from './src/index.ts';
 
     document.querySelector('#notification-1').addEventListener('click', () => {
       notify('hello world');
@@ -82,4 +88,5 @@
 
   </script>
 </body>
+
 </html>
