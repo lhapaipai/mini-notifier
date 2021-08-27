@@ -1,33 +1,33 @@
-import "./css/index.scss";
+import "./css/index.css";
 import * as draw from "./draw";
 
-const bounceInClass = "pentation-notification--bounce-in";
+const bounceInClass = "pentatrion-notification--bounce-in";
 
-let wrappers_: HTMLElement[] = [];
+const wrappers_: HTMLElement[] = [];
 
 function prepare_(container = document.body) {
   if (container.dataset.miniNotifier) {
     return wrappers_[+container.dataset.miniNotifier];
   }
 
-  let wrapper = draw.getWrapper();
+  const wrapper = draw.getWrapper();
 
   if (container === document.body) {
     wrapper.classList.add("fixed");
   }
-  let length = wrappers_.push(wrapper);
+  const length = wrappers_.push(wrapper);
   container.dataset.miniNotifier = (length - 1).toString();
   container.appendChild(wrapper);
 
   return wrapper;
 }
 
-export function notify(message = "", options: NotifyOptions = {}) {
-  let wrapper = prepare_(options.target);
+export function notify(message = "", options: draw.NotifyOptions = {}): void {
+  const wrapper = prepare_(options.target);
 
   const time = options.time || 5000;
 
-  let elt = draw.alert(message, options);
+  const elt = draw.alert(message, options);
   window.setTimeout(function () {
     elt.remove();
   }, time);
@@ -36,19 +36,19 @@ export function notify(message = "", options: NotifyOptions = {}) {
   elt.classList.add(bounceInClass);
 }
 
-export function confirm(message = "", options: ConfirmOptions = {}) {
-  let wrapper = prepare_(options.target);
+export function confirm(message = "", options: draw.ConfirmOptions = {}): void {
+  const wrapper = prepare_(options.target);
 
-  let elt = draw.confirm(message, options);
+  const elt = draw.confirm(message, options);
 
   wrapper.appendChild(elt);
   elt.classList.add(bounceInClass);
 }
 
-export function prompt(message = "", options: PromptOptions = {}) {
-  let wrapper = prepare_(options.target);
+export function prompt(message = "", options: draw.PromptOptions = {}): void {
+  const wrapper = prepare_(options.target);
 
-  let elt = draw.prompt(message, options);
+  const elt = draw.prompt(message, options);
 
   wrapper.appendChild(elt);
   elt.classList.add(bounceInClass);

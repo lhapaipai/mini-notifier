@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,9 +11,11 @@
     body {
       margin: 50px;
     }
+
     .btns button {
       margin: .5rem .5rem;
     }
+
     #box {
       position: relative;
       margin: 50px 0;
@@ -21,10 +24,11 @@
     }
   </style>
 </head>
+
 <body>
   <div class="btns">
     <button id="notification-1">Notification (time 5s)</button>
-    <button id="notification-2">Notification</button>
+    <button id="notification-2">Notification très longue</button>
     <button id="notification-3">Notification success</button>
     <button id="notification-4">Notification error</button>
     <button id="notification-5">Notification confirm</button>
@@ -33,33 +37,35 @@
   </div>
   <div id="box">
     <h2>Box</h2>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non praesentium voluptatum incidunt molestias delectus perspiciatis! Officia, soluta veritatis quae aliquam ad totam odio cum aliquid magni laudantium voluptate maiores dolore!</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non praesentium voluptatum incidunt molestias delectus
+      perspiciatis! Officia, soluta veritatis quae aliquam ad totam odio cum aliquid magni laudantium voluptate maiores
+      dolore!</p>
   </div>
-  <script src="/dist/mini-notifier.umd.js"></script>
-  <script>
+  <script type="module">
+    import { notify, prompt, confirm } from '/dist/index.es.js';
 
     document.querySelector('#notification-1').addEventListener('click', () => {
-      miniNotifier.notify('hello world');
+      notify('hello world');
     });
     document.querySelector('#notification-2').addEventListener('click', () => {
-      miniNotifier.notify('hello world hello world hello world hello world hello world hello world hello world hello world', {
+      notify('hello world hello world hello world hello world hello world hello world hello world hello world', {
         time: 500000,
       });
     });
     document.querySelector('#notification-3').addEventListener('click', () => {
-      miniNotifier.notify('hello world', {
+      notify('hello world', {
         time: 500000,
         style: 'success'
       });
     });
     document.querySelector('#notification-4').addEventListener('click', () => {
-      miniNotifier.notify('hello world', {
+      notify('hello world', {
         time: 500000,
         style: 'error'
       });
     });
     document.querySelector('#notification-5').addEventListener('click', () => {
-      miniNotifier.confirm('hello world', {
+      confirm('hello world', {
         okText: 'Valider',
         cancelText: 'Annuler',
         okHandler: () => console.log('ok'),
@@ -75,7 +81,7 @@
       })
     });
     document.querySelector('#notification-7').addEventListener('click', () => {
-      miniNotifier.notify('hello world', {
+      notify('hello world', {
         time: 500000,
         target: document.querySelector('#box')
       });
@@ -83,4 +89,5 @@
 
   </script>
 </body>
+
 </html>

@@ -1,16 +1,45 @@
 const CSS_ = {
-  wrapper: "pentation-notifications",
-  notification: "pentation-notification",
-  crossBtn: "pentation-notification__cross",
-  btnsWrapper: "pentation-notification__btns",
+  wrapper: "pentatrion-notifications",
+  notification: "pentatrion-notification",
+  crossBtn: "pentatrion-notification__cross",
+  btnsWrapper: "pentatrion-notification__btns",
 };
 
-const alert = function alert(message: string, options: NotifyOptions = {}) {
-  let notify = document.createElement("DIV"),
+export type NotifyOptions = {
+  time?: number;
+  style?: "success" | "error" | "prompt";
+  target?: HTMLElement;
+};
+
+export type ConfirmOptions = {
+  okText?: string;
+  cancelText?: string;
+  okHandler?: () => void;
+  cancelHandler?: () => void;
+  target?: HTMLElement;
+};
+
+export type PromptOptions = NotifyOptions & {
+  okText?: string;
+  okHandler?: (data: string) => void;
+  cancelHandler?: () => void;
+  inputType?: HTMLInputElement["type"];
+  placeholder?: string;
+  default?: string;
+};
+
+const alert = function alert(
+  message: string,
+  options: NotifyOptions = {}
+): HTMLElement {
+  const notify = document.createElement("DIV"),
     cross = document.createElement("DIV"),
     style = options.style;
 
-  let svgCross = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  const svgCross = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "svg"
+  );
   svgCross.innerHTML =
     '<path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path>';
   svgCross.setAttribute("viewBox", "0 0 352 512");
@@ -35,8 +64,8 @@ const alert = function alert(message: string, options: NotifyOptions = {}) {
 const confirm = function confirm(
   message: string,
   options: ConfirmOptions = {}
-) {
-  let notify = alert(message, options),
+): HTMLElement {
+  const notify = alert(message, options),
     btnsWrapper = document.createElement("div"),
     okBtn = document.createElement("button"),
     cancelBtn = document.createElement("button"),
@@ -72,9 +101,12 @@ const confirm = function confirm(
   return notify;
 };
 
-const prompt = function prompt(message: string, options: PromptOptions = {}) {
+const prompt = function prompt(
+  message: string,
+  options: PromptOptions = {}
+): HTMLElement {
   options.style = "prompt";
-  let notify = alert(message, options),
+  const notify = alert(message, options),
     btnsWrapper = document.createElement("form"),
     okBtn = document.createElement("button"),
     input = document.createElement("input"),
@@ -113,6 +145,7 @@ const prompt = function prompt(message: string, options: PromptOptions = {}) {
 
   if (okHandler && typeof okHandler === "function") {
     okBtn.addEventListener("click", function () {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       okHandler!(input.value);
     });
   }
@@ -131,8 +164,8 @@ const prompt = function prompt(message: string, options: PromptOptions = {}) {
   return notify;
 };
 
-const getWrapper = function getWrapper() {
-  let wrapper = document.createElement("DIV");
+const getWrapper = function getWrapper(): HTMLElement {
+  const wrapper = document.createElement("DIV");
 
   wrapper.classList.add(CSS_.wrapper);
 

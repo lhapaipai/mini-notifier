@@ -1,7 +1,7 @@
-@import "variables.scss";
-@import "animation.scss";
+@import "./variables.css";
+@import "./animation.css";
 
-.pentation-notifications {
+.pentatrion-notifications {
   position: absolute;
   &.fixed {
     position: fixed;
@@ -11,7 +11,7 @@
   left: 20px;
 }
 /* Default notification styles */
-.pentation-notification {
+.pentatrion-notification {
   * {
       box-sizing: content-box;
   }
@@ -26,16 +26,16 @@
   font-size: 14px;
   line-height: 1.4em;
   word-wrap: break-word;
-  border-top: 3px solid $yellow;
+  border-top: 3px solid var(--yellow);
 
   &--success {
-      background: $greenLight !important;
-      border-top: 3px solid $green;
+      background: var(--greenLight) !important;
+      border-top: 3px solid var(--green);
   }
 
   &--error {
-      background: $redLight !important;
-      border-top: 3px solid $red;
+      background: var(--redLight) !important;
+      border-top: 3px solid var(--red);
   }
 
   &__cross {

@@ -6,32 +6,45 @@
   ],
   "version": "0.3.0",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview"
+    "dev": "npm run clean && rollup -cw",
+    "prebuild": "npm run clean",
+    "build": "npm run build:types && npm run build:js",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "rollup -c",
+    "serve": "http-server .",
+    "clean": "rimraf dist"
   },
   "files": [
     "dist"
   ],
   "license": "MIT",
   "author": "Lhapaipai",
-  "module": "dist/mini-notifier.es.js",
-  "main": "dist/mini-notifier.umd.js",
+  "module": "dist/index.es.js",
+  "main": "dist/index.umd.js",
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/lhapaipai/mini-notifier.git"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^20.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.0.4",
     "@rollup/plugin-typescript": "^8.2.5",
     "@typescript-eslint/eslint-plugin": "^4.29.2",
     "@typescript-eslint/parser": "^4.29.2",
+    "autoprefixer": "^10.3.3",
     "eslint": "^7.24.0",
     "eslint-config-prettier": "^8.2.0",
     "eslint-plugin-prettier": "^3.4.0",
+    "fs-extra": "^10.0.0",
+    "http-server": "^13.0.1",
+    "postcss-import": "^14.0.2",
+    "postcss-nested": "^5.0.6",
     "prettier": "^2.2.1",
-    "sass": "^1.32.8",
-    "typescript": "^4.3.5",
-    "vite": "^2.1.5"
+    "rimraf": "^3.0.2",
+    "rollup": "^2.56.3",
+    "rollup-plugin-postcss": "^4.0.1",
+    "typescript": "^4.3.5"
   }
 }
