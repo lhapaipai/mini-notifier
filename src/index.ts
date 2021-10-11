@@ -3,20 +3,20 @@ import * as draw from "./draw";
 
 const bounceInClass = "pentatrion-notification--bounce-in";
 
-const wrappers_: HTMLElement[] = [];
-
 function prepare_(container = document.body) {
   if (container.dataset.miniNotifier) {
-    return wrappers_[+container.dataset.miniNotifier];
+    const elt = document.querySelector(`#${container.dataset.miniNotifier}`);
+    if (elt) {
+      return elt;
+    }
   }
 
   const wrapper = draw.getWrapper();
-
+  wrapper.id = `mini-notifier-container-${Math.floor(Math.random() * 100000)}`;
   if (container === document.body) {
     wrapper.classList.add("fixed");
   }
-  const length = wrappers_.push(wrapper);
-  container.dataset.miniNotifier = (length - 1).toString();
+  container.dataset.miniNotifier = wrapper.id;
   container.appendChild(wrapper);
 
   return wrapper;

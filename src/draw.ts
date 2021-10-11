@@ -28,18 +28,12 @@ export type PromptOptions = NotifyOptions & {
   default?: string;
 };
 
-const alert = function alert(
-  message: string,
-  options: NotifyOptions = {}
-): HTMLElement {
+const alert = function alert(message: string, options: NotifyOptions = {}): HTMLElement {
   const notify = document.createElement("DIV"),
     cross = document.createElement("DIV"),
     style = options.style;
 
-  const svgCross = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "svg"
-  );
+  const svgCross = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svgCross.innerHTML =
     '<path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path>';
   svgCross.setAttribute("viewBox", "0 0 352 512");
@@ -61,10 +55,7 @@ const alert = function alert(
   return notify;
 };
 
-const confirm = function confirm(
-  message: string,
-  options: ConfirmOptions = {}
-): HTMLElement {
+const confirm = function confirm(message: string, options: ConfirmOptions = {}): HTMLElement {
   const notify = alert(message, options),
     btnsWrapper = document.createElement("div"),
     okBtn = document.createElement("button"),
@@ -101,10 +92,7 @@ const confirm = function confirm(
   return notify;
 };
 
-const prompt = function prompt(
-  message: string,
-  options: PromptOptions = {}
-): HTMLElement {
+const prompt = function prompt(message: string, options: PromptOptions = {}): HTMLElement {
   options.style = "prompt";
   const notify = alert(message, options),
     btnsWrapper = document.createElement("form"),
