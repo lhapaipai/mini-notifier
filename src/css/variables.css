@@ -1,21 +1,11 @@
 .pentatrion-notifications {
-  --yellow: #ffea66;
-  --yellowDark: #eac800;
+  --primary-color: #ffea66;
+  --primary-color-dark: #eac800;
   
   --red: #dc3545;
-  --redLight: #f8d7da;
+  --red-light: #f8d7da;
   --green: #2b5229;
-  --greenLight: #e1fae1;
+  --green-light: #e1fae1;
   
-  --extraLightGray: #eee;
-  --lightGray: #ddd;
-  --gray: #999;
-  --blackLight: #333;
-  
-  --borderRadius: .25rem;
-  
-  --ringShadow: 0 0 0px 3px #eee;
-  --shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  
-  --transition-input: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  --border-radius: .25rem;
 }

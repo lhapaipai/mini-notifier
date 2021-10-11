@@ -22,19 +22,19 @@
   padding: 20px;
   background: #fff;
   box-shadow: 0 11px 17px 0 rgba(23,32,61,.13), 0 0 2px #bbb;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   font-size: 14px;
   line-height: 1.4em;
   word-wrap: break-word;
-  border-top: 3px solid var(--yellow);
+  border-top: 3px solid var(--primary-color);
 
   &--success {
-      background: var(--greenLight) !important;
+      background: var(--green-light) !important;
       border-top: 3px solid var(--green);
   }
 
   &--error {
-      background: var(--redLight) !important;
+      background: var(--red-light) !important;
       border-top: 3px solid var(--red);
   }
 
