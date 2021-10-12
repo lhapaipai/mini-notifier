@@ -3,6 +3,7 @@ const CSS_ = {
   notification: "mini-notifier_notification",
   crossBtn: "mini-notifier_notification__cross",
   btnsWrapper: "mini-notifier_notification__btns",
+  theme: "pentatrion-theme",
 };
 
 export type NotifyOptions = {
@@ -156,6 +157,7 @@ const getWrapper = function getWrapper(): HTMLElement {
   const wrapper = document.createElement("DIV");
 
   wrapper.classList.add(CSS_.wrapper);
+  wrapper.classList.add(CSS_.theme);
 
   return wrapper;
 };
