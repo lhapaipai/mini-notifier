@@ -1,7 +1,7 @@
 @import "./variables.css";
 @import "./animation.css";
 
-.pentatrion-notifications {
+.mini-notifier_notifications {
   position: absolute;
   &.fixed {
     position: fixed;
@@ -11,7 +11,7 @@
   left: 20px;
 }
 /* Default notification styles */
-.pentatrion-notification {
+.mini-notifier_notification {
   * {
       box-sizing: content-box;
   }
@@ -50,6 +50,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      transition: opacity .3s ease;
       &:hover {
           opacity: .7;
       }

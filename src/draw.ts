@@ -1,8 +1,8 @@
 const CSS_ = {
-  wrapper: "pentatrion-notifications",
-  notification: "pentatrion-notification",
-  crossBtn: "pentatrion-notification__cross",
-  btnsWrapper: "pentatrion-notification__btns",
+  wrapper: "mini-notifier_notifications",
+  notification: "mini-notifier_notification",
+  crossBtn: "mini-notifier_notification__cross",
+  btnsWrapper: "mini-notifier_notification__btns",
 };
 
 export type NotifyOptions = {
@@ -69,8 +69,8 @@ const confirm = function confirm(message: string, options: ConfirmOptions = {}):
   okBtn.innerHTML = options.okText || "Valider";
   cancelBtn.innerHTML = options.cancelText || "Annuler";
 
-  okBtn.classList.add("btn");
-  cancelBtn.classList.add("btn", "outlined");
+  okBtn.classList.add("penta-button");
+  cancelBtn.classList.add("penta-button", "outlined");
 
   if (cancelHandler && typeof cancelHandler === "function") {
     cancelBtn.addEventListener("click", cancelHandler);
@@ -105,8 +105,8 @@ const prompt = function prompt(message: string, options: PromptOptions = {}): HT
   btnsWrapper.classList.add(CSS_.btnsWrapper);
 
   okBtn.innerHTML = options.okText || "Valider";
-  okBtn.classList.add("btn");
-  input.classList.add("form-input");
+  okBtn.classList.add("penta-button");
+  input.classList.add("penta-input-text");
 
   if (options.placeholder) {
     input.setAttribute("placeholder", options.placeholder);

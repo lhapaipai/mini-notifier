@@ -1,7 +1,7 @@
 import "./css/index.css";
 import * as draw from "./draw";
 
-const bounceInClass = "pentatrion-notification--bounce-in";
+const bounceInClass = "mini-notifier_notification--bounce-in";
 
 function prepare_(container = document.body) {
   if (container.dataset.miniNotifier) {
