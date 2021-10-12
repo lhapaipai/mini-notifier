@@ -5,7 +5,7 @@ const bounceInClass = "mini-notifier_notification--bounce-in";
 
 function prepare_(container = document.body) {
   if (container.dataset.miniNotifier) {
-    const elt = document.querySelector(`#${container.dataset.miniNotifier}`);
+    const elt = document.querySelector<HTMLElement>(`#${container.dataset.miniNotifier}`);
     if (elt) {
       return elt;
     }
