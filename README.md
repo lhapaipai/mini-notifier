@@ -47,3 +47,31 @@ miniNotifier.notify('hello world', {
   target: document.querySelector('#box')
 });
 ```
+
+## Theme
+
+If you want to custom the MiniNotifier theme.
+
+```js
+import { notify, prepareContainer } from 'mini-notifier';
+import 'mini-notifier/dist/style.css';
+
+// Add custom class `my-theme` to the mini-notifier container.
+prepareContainer(document.body, "my-theme");
+
+notify('hello world');
+```
+
+```css
+.my-theme {
+  --primary-color: #ffea66;
+  --primary-color-dark: #eac800;
+  
+  --red: #dc3545;
+  --red-light: #f8d7da;
+  --green: #2b5229;
+  --green-light: #e1fae1;
+  
+  --border-radius: .25rem;
+}
+```

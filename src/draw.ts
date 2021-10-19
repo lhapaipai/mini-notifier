@@ -3,7 +3,7 @@ const CSS_ = {
   notification: "mini-notifier_notification",
   crossBtn: "mini-notifier_notification__cross",
   btnsWrapper: "mini-notifier_notification__btns",
-  theme: "pentatrion-theme",
+  theme: "mini-notifier-theme",
 };
 
 export type NotifyOptions = {
@@ -153,11 +153,11 @@ const prompt = function prompt(message: string, options: PromptOptions = {}): HT
   return notify;
 };
 
-const getWrapper = function getWrapper(): HTMLElement {
+const getWrapper = function getWrapper(theme?: string): HTMLElement {
   const wrapper = document.createElement("DIV");
 
   wrapper.classList.add(CSS_.wrapper);
-  wrapper.classList.add(CSS_.theme);
+  wrapper.classList.add(theme ? theme : CSS_.theme);
 
   return wrapper;
 };

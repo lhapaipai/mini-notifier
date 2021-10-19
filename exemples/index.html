@@ -42,7 +42,9 @@
       dolore!</p>
   </div>
   <script type="module">
-    import { notify, prompt, confirm } from '/dist/index.es.js';
+    import { notify, prompt, confirm, prepare } from '/dist/index.es.js';
+
+    prepare(document.body, "pentatrion-theme");
 
     document.querySelector('#notification-1').addEventListener('click', () => {
       notify('hello world');
