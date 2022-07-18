@@ -1,7 +1,7 @@
 @import "./variables.css";
 @import "./animation.css";
 
-.mini-notifier_notifications {
+.mini-notifier-container {
   position: absolute;
   &.fixed {
     position: fixed;
@@ -11,7 +11,7 @@
   left: 20px;
 }
 /* Default notification styles */
-.mini-notifier_notification {
+.mini-notifier-notification {
   * {
       box-sizing: content-box;
   }
@@ -26,19 +26,19 @@
   font-size: 14px;
   line-height: 1.4em;
   word-wrap: break-word;
-  border-top: 3px solid var(--primary-color);
+  border-top: 3px solid var(--primary-color500);
 
   &--success {
-      background: var(--green-light) !important;
-      border-top: 3px solid var(--green);
+      background: var(--green200) !important;
+      border-top: 3px solid var(--green500);
   }
 
   &--error {
-      background: var(--red-light) !important;
-      border-top: 3px solid var(--red);
+      background: var(--red200) !important;
+      border-top: 3px solid var(--red500);
   }
 
-  &__cross {
+  &--cross {
        position: absolute;
        top: 5px;
        right: 2px;
@@ -59,7 +59,7 @@
       }
   }
 
-  &__btns {
+  &--btns {
     display: flex;
     flex-flow: row nowrap;
     margin-top: 5px;

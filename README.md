@@ -16,7 +16,7 @@ npm install mini-notifier
 ```
 
 ```js
-import { notify, prompt, confirm } from 'mini-notifier';
+import { notify, prompt, confirm, prepareContainer } from 'mini-notifier';
 import 'mini-notifier/dist/style.css';
 ```
 
@@ -50,27 +50,28 @@ miniNotifier.notify('hello world', {
 
 ## Theme
 
-If you want to custom the MiniNotifier theme.
+If you want to custom the MiniNotifier theme. You can ask mini-notifier not to load css vars with `prepareContainer`.
 
 ```js
 import { notify, prepareContainer } from 'mini-notifier';
 import 'mini-notifier/dist/style.css';
 
-// Add custom class `my-theme` to the mini-notifier container.
-prepareContainer(document.body, "my-theme");
+// Do not inject css vars.
+prepareContainer(document.body, false);
 
 notify('hello world');
 ```
 
 ```css
-.my-theme {
+/* add here your custom css vars */
+.mini-notifier-container {
   --primary-color: #ffea66;
   --primary-color-dark: #eac800;
   
-  --red: #dc3545;
-  --red-light: #f8d7da;
-  --green: #2b5229;
-  --green-light: #e1fae1;
+  --red500: #dc3545;
+  --red200: #f8d7da;
+  --green500: #2b5229;
+  --green200: #e1fae1;
   
   --border-radius: .25rem;
 }

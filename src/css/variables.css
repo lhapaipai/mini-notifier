@@ -1,11 +1,10 @@
-.mini-notifier-theme {
-  --primary-color: #ffea66;
-  --primary-color-dark: #eac800;
+.mini-notifier-container.with-css-vars {
+  --primary-color500: #ffea66;
   
-  --red: #dc3545;
-  --red-light: #f8d7da;
-  --green: #2b5229;
-  --green-light: #e1fae1;
+  --red500: #dc3545;
+  --red200: #f8d7da;
+  --green500: #2b5229;
+  --green200: #e1fae1;
   
   --border-radius: .25rem;
 }

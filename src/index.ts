@@ -1,17 +1,22 @@
 import "./css/index.css";
 import * as draw from "./draw";
 
-const bounceInClass = "mini-notifier_notification--bounce-in";
+const bounceInClass = "mini-notifier-notification--bounce-in";
 
-export function prepareContainer(container = document.body, theme?: string): HTMLElement {
+export function prepareContainer(
+  container = document.body,
+  injectCssVars?: boolean
+): HTMLElement {
   if (container.dataset.miniNotifier) {
-    const elt = document.querySelector<HTMLElement>(`#${container.dataset.miniNotifier}`);
+    const elt = document.querySelector<HTMLElement>(
+      `#${container.dataset.miniNotifier}`
+    );
     if (elt) {
       return elt;
     }
   }
 
-  const wrapper = draw.getWrapper(theme);
+  const wrapper = draw.getWrapper(injectCssVars);
   wrapper.id = `mini-notifier-container-${Math.floor(Math.random() * 100000)}`;
   if (container === document.body) {
     wrapper.classList.add("fixed");
