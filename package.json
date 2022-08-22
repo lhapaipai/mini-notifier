@@ -4,7 +4,7 @@
   "keywords": [
     "notifier"
   ],
-  "version": "0.5.0",
+  "version": "0.5.1",
   "scripts": {
     "dev": "npm run clean && rollup -cw",
     "prebuild": "npm run clean",
