@@ -79,8 +79,8 @@ const confirm = function confirm(
   okBtn.innerHTML = options.okText || "Valider";
   cancelBtn.innerHTML = options.cancelText || "Annuler";
 
-  okBtn.classList.add("penta-button");
-  cancelBtn.classList.add("penta-button", "outlined");
+  okBtn.classList.add("penta-button", "primary-color", "small");
+  cancelBtn.classList.add("penta-button", "outlined", "small");
 
   if (cancelHandler && typeof cancelHandler === "function") {
     cancelBtn.addEventListener("click", cancelHandler);
@@ -118,7 +118,7 @@ const prompt = function prompt(
   btnsWrapper.classList.add(CSS_.btnsWrapper);
 
   okBtn.innerHTML = options.okText || "Valider";
-  okBtn.classList.add("penta-button");
+  okBtn.classList.add("penta-button", "primary-color", "small");
   input.classList.add("penta-input-text");
 
   if (options.placeholder) {
