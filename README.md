@@ -12,23 +12,29 @@ npm install mini-notifier
 
 ```html
 <link rel="stylesheet" href="dist/style.css">
-<script src="dist/mini-notifier.umd.js"></script>
+<script src="dist/mini-notifier.umd.cjs"></script>
+<script>
+  { notify, prompt, confirm, configure } = miniNotifier;
+</script>
 ```
 
+with a bundler like `vite` or `webpack`.
+
 ```js
-import { notify, prompt, confirm, prepareContainer } from 'mini-notifier';
+import { notify, prompt, confirm, configure } from 'mini-notifier';
 import 'mini-notifier/dist/style.css';
 ```
 
 ```js
-miniNotifier.notify('hello world');
+notify('hello world');
 
-miniNotifier.notify(message, {
+notify(message, {
   time: 5000,
-  style: 'success|error'
+  style: 'success|error',
+  position: 'top-left'
 });
 
-miniNotifier.confirm('Are you sure ?', {
+confirm('Are you sure ?', {
   okText: 'Yes',
   cancelText: 'Sorry, no',
   okHandler: () => console.log('ok'),
@@ -36,43 +42,48 @@ miniNotifier.confirm('Are you sure ?', {
 });
 
 
-miniNotifier.prompt('Enter your email', {
+prompt('Enter your email', {
   okText: 'Enter',
   okHandler: (data) => console.log('your email:', data),
   inputType: 'email',
   placeholder: 'team@ifmo.su'
 })
 
-miniNotifier.notify('hello world', {
-  target: document.querySelector('#box')
+notify('hello world', {
+  container: document.querySelector('#box')
+});
+
+configure({
+  container: document.body,
+  position: 'bottom-left',
+  themePrefix: 'penta'
 });
 ```
 
 ## Theme
 
-If you want to custom the MiniNotifier theme. You can ask mini-notifier not to load css vars with `prepareContainer`.
+If you want to custom the MiniNotifier theme. You can define your own css vars.
 
-```js
-import { notify, prepareContainer } from 'mini-notifier';
-import 'mini-notifier/dist/style.css';
-
-// Do not inject css vars.
-prepareContainer(document.body, false);
-
-notify('hello world');
-```
 
 ```css
-/* add here your custom css vars */
-.mini-notifier-container {
-  --primary-color: #ffea66;
-  --primary-color-dark: #eac800;
-  
+:root {
+  --primary-color500: #ffea66;
+
   --red500: #dc3545;
   --red200: #f8d7da;
   --green500: #2b5229;
   --green200: #e1fae1;
-  
+
   --border-radius: .25rem;
 }
+```
+
+in order to integrate as much as possible into your application, no css has been applied to the buttons.
+
+If you want ready-to-go theme you can add `pentatrion-theme` package from npm.
+
+```
+import "pentatrion-theme/css/button.scss";
+import "pentatrion-theme/css/text-textarea-select.scss";
+import "pentatrion-theme/css/variables.scss";
 ```

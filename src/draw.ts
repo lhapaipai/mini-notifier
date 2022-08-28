@@ -1,5 +1,7 @@
+import { ConfigureOptions } from ".";
+
 const CSS_ = {
-  wrapper: "mini-notifier-container",
+  container: "mini-notifier-container",
   notification: "mini-notifier-notification",
   crossBtn: "mini-notifier-notification--cross",
   btnsWrapper: "mini-notifier-notification--btns",
@@ -9,7 +11,8 @@ const CSS_ = {
 export type NotifyOptions = {
   time?: number;
   style?: "success" | "error" | "prompt";
-  target?: HTMLElement;
+  container?: ConfigureOptions["container"];
+  position?: ConfigureOptions["position"];
 };
 
 export type ConfirmOptions = {
@@ -17,7 +20,8 @@ export type ConfirmOptions = {
   cancelText?: string;
   okHandler?: () => void;
   cancelHandler?: () => void;
-  target?: HTMLElement;
+  container?: ConfigureOptions["container"];
+  position?: ConfigureOptions["position"];
 };
 
 export type PromptOptions = NotifyOptions & {
@@ -29,11 +33,11 @@ export type PromptOptions = NotifyOptions & {
   default?: string;
 };
 
-const alert = function alert(
+const notify = function notify(
   message: string,
   options: NotifyOptions = {}
 ): HTMLElement {
-  const notify = document.createElement("DIV"),
+  const $notify = document.createElement("DIV"),
     cross = document.createElement("DIV"),
     style = options.style;
 
@@ -46,31 +50,32 @@ const alert = function alert(
   svgCross.setAttribute("viewBox", "0 0 352 512");
   svgCross.setAttribute("height", "15");
   cross.append(svgCross);
-  notify.classList.add(CSS_.notification);
+  $notify.classList.add(CSS_.notification);
 
   if (style) {
-    notify.classList.add(CSS_.notification + "--" + style);
+    $notify.classList.add(CSS_.notification + "--" + style);
   }
 
-  notify.innerHTML = message;
+  $notify.innerHTML = message;
 
   cross.classList.add(CSS_.crossBtn);
-  cross.addEventListener("click", notify.remove.bind(notify));
+  cross.addEventListener("click", $notify.remove.bind($notify));
 
-  notify.appendChild(cross);
+  $notify.appendChild(cross);
 
-  return notify;
+  return $notify;
 };
 
 const confirm = function confirm(
   message: string,
-  options: ConfirmOptions = {}
+  options: ConfirmOptions = {},
+  themePrefix: string
 ): HTMLElement {
-  const notify = alert(message, options),
+  const $notify = notify(message, options),
     btnsWrapper = document.createElement("div"),
     okBtn = document.createElement("button"),
     cancelBtn = document.createElement("button"),
-    crossBtn = notify.querySelector(`.${CSS_.crossBtn}`),
+    crossBtn = $notify.querySelector(`.${CSS_.crossBtn}`),
     cancelHandler = options.cancelHandler,
     okHandler = options.okHandler;
 
@@ -79,8 +84,8 @@ const confirm = function confirm(
   okBtn.innerHTML = options.okText || "Valider";
   cancelBtn.innerHTML = options.cancelText || "Annuler";
 
-  okBtn.classList.add("penta-button", "primary-color", "small");
-  cancelBtn.classList.add("penta-button", "outlined", "small");
+  okBtn.classList.add(`${themePrefix}-button`, "primary-color", "small");
+  cancelBtn.classList.add(`${themePrefix}-button`, "outlined", "small");
 
   if (cancelHandler && typeof cancelHandler === "function") {
     cancelBtn.addEventListener("click", cancelHandler);
@@ -91,35 +96,36 @@ const confirm = function confirm(
     okBtn.addEventListener("click", okHandler);
   }
 
-  okBtn.addEventListener("click", notify.remove.bind(notify));
-  cancelBtn.addEventListener("click", notify.remove.bind(notify));
+  okBtn.addEventListener("click", $notify.remove.bind($notify));
+  cancelBtn.addEventListener("click", $notify.remove.bind($notify));
 
   btnsWrapper.append(cancelBtn);
   btnsWrapper.append(okBtn);
 
-  notify.append(btnsWrapper);
+  $notify.append(btnsWrapper);
 
-  return notify;
+  return $notify;
 };
 
 const prompt = function prompt(
   message: string,
-  options: PromptOptions = {}
+  options: PromptOptions = {},
+  themePrefix: string
 ): HTMLElement {
   options.style = "prompt";
-  const notify = alert(message, options),
+  const $notify = notify(message, options),
     btnsWrapper = document.createElement("form"),
     okBtn = document.createElement("button"),
     input = document.createElement("input"),
-    crossBtn = notify.querySelector(`.${CSS_.crossBtn}`),
+    crossBtn = $notify.querySelector(`.${CSS_.crossBtn}`),
     cancelHandler = options.cancelHandler,
     okHandler = options.okHandler;
 
   btnsWrapper.classList.add(CSS_.btnsWrapper);
 
   okBtn.innerHTML = options.okText || "Valider";
-  okBtn.classList.add("penta-button", "primary-color", "small");
-  input.classList.add("penta-input-text");
+  okBtn.classList.add(`${themePrefix}-button`, "primary-color", "small");
+  input.classList.add(`${themePrefix}-input-text`);
 
   if (options.placeholder) {
     input.setAttribute("placeholder", options.placeholder);
@@ -151,29 +157,25 @@ const prompt = function prompt(
     });
   }
 
-  okBtn.addEventListener("click", notify.remove.bind(notify));
+  okBtn.addEventListener("click", $notify.remove.bind($notify));
 
   btnsWrapper.appendChild(input);
   btnsWrapper.appendChild(okBtn);
 
-  notify.appendChild(btnsWrapper);
+  $notify.appendChild(btnsWrapper);
 
   setTimeout(() => {
     input.focus();
   }, 100);
 
-  return notify;
+  return $notify;
 };
 
-const getWrapper = function getWrapper(injectCssVars?: boolean): HTMLElement {
-  const wrapper = document.createElement("DIV");
+const createContainer = function (position: ConfigureOptions["position"]) {
+  const container = document.createElement("DIV");
 
-  wrapper.classList.add(CSS_.wrapper);
-  if (injectCssVars !== false) {
-    wrapper.classList.add("with-css-vars");
-  }
-
-  return wrapper;
+  container.classList.add(CSS_.container, position);
+  return container;
 };
 
-export { alert, confirm, prompt, getWrapper };
+export { notify, confirm, prompt, createContainer };

@@ -1,10 +1,11 @@
-.mini-notifier-container.with-css-vars {
-  --primary-color500: #ffea66;
-  
-  --red500: #dc3545;
-  --red200: #f8d7da;
-  --green500: #2b5229;
-  --green200: #e1fae1;
-  
-  --border-radius: .25rem;
+.mini-notifier-container {
+  --mn-primary-color500: var(--primary-color500, #ffea66);
+
+  --mn-red500: var(--red500, #dc3545);
+  --mn-red200: var(--red200, #f8d7da);
+  --mn-green500: var(--green500, #2b5229);
+  --mn-green200: var(--green200, #e1fae1);
+
+  --mn-border-radius: var(--border-radius, .25rem);
+
 }

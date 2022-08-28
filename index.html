@@ -17,6 +17,7 @@
     <button id="notification-5">Notification confirm</button>
     <button id="notification-6">Notification prompt</button>
     <button id="notification-7">Notification target box</button>
+    <button id="notification-8">Notification top-right</button>
   </div>
   <div id="box">
     <h2>Box</h2>
@@ -24,11 +25,11 @@
       perspiciatis! Officia, soluta veritatis quae aliquam ad totam odio cum aliquid magni laudantium voluptate maiores
       dolore!</p>
   </div>
-  <div id="app"></div>
   <script type="module">
-    import { notify, prompt, confirm, prepareContainer } from '/src/index.ts';
+    import "./index.scss";
+    import { notify, prompt, confirm, configure } from '/src/index.ts';
 
-    prepareContainer(document.body, true);
+    // prepareContainer(document.body, true);
 
     document.querySelector('#notification-1').addEventListener('click', () => {
       notify('hello world');
@@ -63,13 +64,19 @@
         okText: 'Enter',
         okHandler: (data) => console.log('your email:', data),
         inputType: 'email',
-        placeholder: 'team@ifmo.su'
+        placeholder: 'team@ifmo.su',
+        position: 'center'
       })
     });
     document.querySelector('#notification-7').addEventListener('click', () => {
       notify('hello world', {
         time: 500000,
-        target: document.querySelector('#box')
+        container: document.querySelector('#box')
+      });
+    });
+    document.querySelector('#notification-8').addEventListener('click', () => {
+      notify('hello world', {
+        position: 'top-right'
       });
     });
 
