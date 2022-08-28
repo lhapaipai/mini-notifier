@@ -19,8 +19,5 @@
   "rules": {
     "@typescript-eslint/no-console": 0,
     "@typescript-eslint/no-invalid-this": 2
-  },
-  "ignorePatterns": [
-    "rollup.config.js"
-  ]
+  }
 }

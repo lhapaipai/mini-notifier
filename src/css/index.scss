@@ -1,19 +1,22 @@
-@import "./variables.css";
-@import "./animation.css";
+@import "./variables.scss";
+@import "./animation.scss";
 
 .mini-notifier-container {
   position: absolute;
+
   &.fixed {
     position: fixed;
   }
+
   z-index: 20;
   bottom: 20px;
   left: 20px;
 }
+
 /* Default notification styles */
 .mini-notifier-notification {
   * {
-      box-sizing: content-box;
+    box-sizing: content-box;
   }
 
   position: relative;
@@ -21,7 +24,8 @@
   margin-top: 15px;
   padding: 20px;
   background: #fff;
-  box-shadow: 0 11px 17px 0 rgba(23,32,61,.13), 0 0 2px #bbb;
+  box-shadow: 0 11px 17px 0 rgba(23, 32, 61, .13),
+  0 0 2px #bbb;
   border-radius: var(--border-radius);
   font-size: 14px;
   line-height: 1.4em;
@@ -29,34 +33,36 @@
   border-top: 3px solid var(--primary-color500);
 
   &--success {
-      background: var(--green200) !important;
-      border-top: 3px solid var(--green500);
+    background: var(--green200) !important;
+    border-top: 3px solid var(--green500);
   }
 
   &--error {
-      background: var(--red200) !important;
-      border-top: 3px solid var(--red500);
+    background: var(--red200) !important;
+    border-top: 3px solid var(--red500);
   }
 
   &--cross {
-       position: absolute;
-       top: 5px;
-       right: 2px;
-       width: 20px;
-       height: 20px;
-       opacity: 0.54;
-       cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 2px;
+    width: 20px;
+    height: 20px;
+    opacity: 0.54;
+    cursor: pointer;
 
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: opacity .3s ease;
-      &:hover {
-          opacity: .7;
-      }
-      &:active {
-          opacity: 1;
-      }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity .3s ease;
+
+    &:hover {
+      opacity: .7;
+    }
+
+    &:active {
+      opacity: 1;
+    }
   }
 
   &--btns {
@@ -69,7 +75,7 @@
       margin-right: 10px;
     }
 
-    > .penta-input-text {
+    >.penta-input-text {
       width: 0;
       flex: 1;
     }

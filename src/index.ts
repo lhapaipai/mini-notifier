@@ -1,4 +1,4 @@
-import "./css/index.css";
+import "./css/index.scss";
 import * as draw from "./draw";
 
 const bounceInClass = "mini-notifier-notification--bounce-in";
