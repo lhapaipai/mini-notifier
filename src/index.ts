@@ -17,7 +17,7 @@ export type ConfigureOptions = {
 };
 
 let defaultContainer: ConfigureOptions["container"] = document.body;
-let defaultPosition: ConfigureOptions["position"] = "bottom-left";
+let defaultPosition: ConfigureOptions["position"] = "top-right";
 let defaultThemePrefix: ConfigureOptions["themePrefix"] = "penta";
 
 export function configure(options: Partial<ConfigureOptions> = {}): void {
