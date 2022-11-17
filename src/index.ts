@@ -20,7 +20,7 @@ let defaultContainer: ConfigureOptions["container"] = document.body;
 let defaultPosition: ConfigureOptions["position"] = "bottom-left";
 let defaultThemePrefix: ConfigureOptions["themePrefix"] = "penta";
 
-export function configure(options: Partial<ConfigureOptions> = {}) {
+export function configure(options: Partial<ConfigureOptions> = {}): void {
   if (options.container) {
     defaultContainer = options.container;
   }
