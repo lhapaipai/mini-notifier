@@ -14,14 +14,14 @@ npm install mini-notifier
 <link rel="stylesheet" href="dist/style.css">
 <script src="dist/mini-notifier.umd.cjs"></script>
 <script>
-  { notify, prompt, confirm, configure } = miniNotifier;
+  { notify, prompt, confirm, promptLogin, configure } = miniNotifier;
 </script>
 ```
 
 with a bundler like `vite` or `webpack`.
 
 ```js
-import { notify, prompt, confirm, configure } from 'mini-notifier';
+import { notify, prompt, confirm, promptLogin, configure } from 'mini-notifier';
 import 'mini-notifier/dist/style.css';
 ```
 
@@ -52,6 +52,10 @@ prompt('Enter your email', {
 notify('hello world', {
   container: document.querySelector('#box')
 });
+
+promptLogin('Login box', {
+  okHandler: ({email, password}) => console.log('your email:', email, 'your password', password)
+})
 
 configure({
   container: document.body,

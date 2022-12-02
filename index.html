@@ -18,6 +18,7 @@
     <button id="notification-6">Notification prompt</button>
     <button id="notification-7">Notification target box</button>
     <button id="notification-8">Notification top-right</button>
+    <button id="notification-9">Notification promptLogin</button>
   </div>
   <div id="box">
     <h2>Box</h2>
@@ -27,7 +28,7 @@
   </div>
   <script type="module">
     import "./index.scss";
-    import { notify, prompt, confirm, configure } from '/src/index.ts';
+    import { notify, prompt, confirm, promptLogin, configure } from '/src/index.ts';
 
     // prepareContainer(document.body, true);
 
@@ -79,8 +80,14 @@
         position: 'top-right'
       });
     });
-
-
+    document.querySelector('#notification-9').addEventListener('click', () => {
+      promptLogin('Vous avez été déconnecté, veuillez vous réidentifier', {
+        position: 'top-right',
+        okHandler: (payload) => {
+          console.log(payload);
+        }
+      });
+    });
   </script>
 </body>
 

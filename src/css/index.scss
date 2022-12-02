@@ -56,6 +56,10 @@
   word-wrap: break-word;
   border-top: 3px solid var(--mn-primary-color500);
 
+  &.login {
+    width: 350px;
+  }
+
   &--success {
     background: var(--mn-green200) !important;
     border-top: 3px solid var(--mn-green500);
@@ -92,7 +96,7 @@
   &--btns {
     display: flex;
     flex-flow: row nowrap;
-    margin-top: 5px;
+    margin-top: 20px;
     justify-content: space-around;
 
     > :first-child {
@@ -102,6 +106,17 @@
     >.penta-input-text {
       width: 0;
       flex: 1;
+    }
+  }
+
+  &--label {
+    margin-top: 20px;
+  }
+
+  &--form {
+    input {
+      width: 100%;
+      box-sizing: border-box;
     }
   }
 }

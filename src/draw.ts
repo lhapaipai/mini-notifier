@@ -4,7 +4,9 @@ const CSS_ = {
   container: "mini-notifier-container",
   notification: "mini-notifier-notification",
   crossBtn: "mini-notifier-notification--cross",
+  label: "mini-notifier-notification--label",
   btnsWrapper: "mini-notifier-notification--btns",
+  formWrapper: "mini-notifier-notification--form",
   theme: "mini-notifier-theme",
 };
 
@@ -15,7 +17,7 @@ export type NotifyOptions = {
   position?: ConfigureOptions["position"];
 };
 
-export type ConfirmOptions = {
+export type ConfirmOptions = NotifyOptions & {
   okText?: string;
   cancelText?: string;
   okHandler?: () => void;
@@ -33,12 +35,27 @@ export type PromptOptions = NotifyOptions & {
   default?: string;
 };
 
+type PromptLoginOkHandler = {
+  email: string;
+  password: string;
+};
+
+export type PromptLoginOptions = NotifyOptions & {
+  loginText?: string;
+  emailText?: string;
+  passwordText?: string;
+  loginHandler?: (payload: PromptLoginOkHandler) => void;
+  container?: ConfigureOptions["container"];
+  position?: ConfigureOptions["position"];
+};
+
 const notify = function notify(
   message: string,
   options: NotifyOptions = {}
 ): HTMLElement {
-  const $notify = document.createElement("DIV"),
-    cross = document.createElement("DIV"),
+  const $notify = document.createElement("div"),
+    $cross = document.createElement("div"),
+    $message = document.createElement("div"),
     style = options.style;
 
   const svgCross = document.createElementNS(
@@ -49,19 +66,20 @@ const notify = function notify(
     '<path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path>';
   svgCross.setAttribute("viewBox", "0 0 352 512");
   svgCross.setAttribute("height", "15");
-  cross.append(svgCross);
+  $cross.append(svgCross);
   $notify.classList.add(CSS_.notification);
 
   if (style) {
     $notify.classList.add(CSS_.notification + "--" + style);
   }
+  $message.innerHTML = message;
 
-  $notify.innerHTML = message;
+  $notify.append($message);
 
-  cross.classList.add(CSS_.crossBtn);
-  cross.addEventListener("click", $notify.remove.bind($notify));
+  $cross.classList.add(CSS_.crossBtn);
+  $cross.addEventListener("click", $notify.remove.bind($notify));
 
-  $notify.appendChild(cross);
+  $notify.appendChild($cross);
 
   return $notify;
 };
@@ -103,6 +121,80 @@ const confirm = function confirm(
   btnsWrapper.append(okBtn);
 
   $notify.append(btnsWrapper);
+
+  return $notify;
+};
+
+const promptLogin = function promptLogin(
+  message: string,
+  options: PromptLoginOptions = {},
+  themePrefix: string
+): HTMLElement {
+  const $notify = notify(message, options),
+    formWrapper = document.createElement("form"),
+    btnsWrapper = document.createElement("div"),
+    emailLabel = document.createElement("div"),
+    emailInput = document.createElement("input"),
+    passwordLabel = document.createElement("div"),
+    passwordInput = document.createElement("input"),
+    loginBtn = document.createElement("button"),
+    crossBtn = $notify.querySelector(`.${CSS_.crossBtn}`),
+    loginHandler = options.loginHandler;
+
+  $notify.classList.add("login");
+
+  formWrapper.classList.add(CSS_.formWrapper);
+
+  btnsWrapper.classList.add(CSS_.btnsWrapper);
+
+  emailLabel.classList.add(CSS_.label);
+  emailLabel.innerHTML = options.emailText || "Email";
+  emailInput.type = "email";
+  emailInput.classList.add(`${themePrefix}-input-text`);
+
+  passwordLabel.classList.add(CSS_.label);
+  passwordLabel.innerHTML = options.passwordText || "Mot de passe";
+  passwordInput.type = "password";
+  passwordInput.classList.add(`${themePrefix}-input-text`);
+
+  loginBtn.innerHTML = options.loginText || "Se connecter";
+
+  loginBtn.classList.add(`${themePrefix}-button`, "primary-color", "small");
+
+  formWrapper.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (loginHandler && typeof loginHandler === "function") {
+      loginHandler({
+        email: emailInput.value,
+        password: passwordInput.value,
+      });
+    }
+
+    $notify.remove();
+  });
+
+  if (loginHandler && typeof loginHandler === "function") {
+    loginBtn.addEventListener("click", function () {
+      loginHandler({
+        email: emailInput.value,
+        password: passwordInput.value,
+      });
+      $notify.remove();
+    });
+  }
+
+  // loginBtn.addEventListener("click", $notify.remove.bind($notify));
+  crossBtn && crossBtn.addEventListener("click", $notify.remove.bind($notify));
+
+  btnsWrapper.append(loginBtn);
+  formWrapper.append(
+    emailLabel,
+    emailInput,
+    passwordLabel,
+    passwordInput,
+    btnsWrapper
+  );
+  $notify.append(formWrapper);
 
   return $notify;
 };
@@ -172,10 +264,10 @@ const prompt = function prompt(
 };
 
 const createContainer = function (position: ConfigureOptions["position"]) {
-  const container = document.createElement("DIV");
+  const container = document.createElement("div");
 
   container.classList.add(CSS_.container, position);
   return container;
 };
 
-export { notify, confirm, prompt, createContainer };
+export { notify, confirm, prompt, promptLogin, createContainer };

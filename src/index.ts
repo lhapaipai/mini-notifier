@@ -88,3 +88,16 @@ export function prompt(message = "", options: draw.PromptOptions = {}): void {
   wrapper.appendChild(elt);
   elt.classList.add(bounceInClass);
 }
+
+export function promptLogin(
+  message = "",
+  options: draw.PromptLoginOptions = {}
+): void {
+  const position = options.position || "center";
+  const wrapper = getContainer(options.container, position);
+
+  const elt = draw.promptLogin(message, options, defaultThemePrefix);
+
+  wrapper.appendChild(elt);
+  elt.classList.add(bounceInClass);
+}
