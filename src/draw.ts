@@ -38,6 +38,7 @@ export type PromptOptions = NotifyOptions & {
 type PromptLoginOkHandler = {
   email: string;
   password: string;
+  rememberMe?: boolean;
 };
 
 export type PromptLoginOptions = NotifyOptions & {
@@ -47,6 +48,8 @@ export type PromptLoginOptions = NotifyOptions & {
   loginHandler?: (payload: PromptLoginOkHandler) => void;
   container?: ConfigureOptions["container"];
   position?: ConfigureOptions["position"];
+  rememberMe?: boolean;
+  rememberMeText?: string;
 };
 
 const notify = function notify(
@@ -137,6 +140,9 @@ const promptLogin = function promptLogin(
     emailInput = document.createElement("input"),
     passwordLabel = document.createElement("div"),
     passwordInput = document.createElement("input"),
+    rememberGroup = document.createElement("div"),
+    rememberLabel = document.createElement("label"),
+    rememberInput = document.createElement("input"),
     loginBtn = document.createElement("button"),
     crossBtn = $notify.querySelector(`.${CSS_.crossBtn}`),
     loginHandler = options.loginHandler;
@@ -144,17 +150,18 @@ const promptLogin = function promptLogin(
   $notify.classList.add("login");
 
   formWrapper.classList.add(CSS_.formWrapper);
-
   btnsWrapper.classList.add(CSS_.btnsWrapper);
 
   emailLabel.classList.add(CSS_.label);
   emailLabel.innerHTML = options.emailText || "Email";
   emailInput.type = "email";
+  emailInput.name = "email";
   emailInput.classList.add(`${themePrefix}-input-text`);
 
   passwordLabel.classList.add(CSS_.label);
   passwordLabel.innerHTML = options.passwordText || "Mot de passe";
   passwordInput.type = "password";
+  passwordInput.name = "password";
   passwordInput.classList.add(`${themePrefix}-input-text`);
 
   loginBtn.innerHTML = options.loginText || "Se connecter";
@@ -164,10 +171,12 @@ const promptLogin = function promptLogin(
   formWrapper.addEventListener("submit", function (e) {
     e.preventDefault();
     if (loginHandler && typeof loginHandler === "function") {
-      loginHandler({
+      const payload = {
         email: emailInput.value,
         password: passwordInput.value,
-      });
+        rememberMe: rememberInput.checked,
+      };
+      loginHandler(payload);
     }
 
     $notify.remove();
@@ -178,6 +187,7 @@ const promptLogin = function promptLogin(
       loginHandler({
         email: emailInput.value,
         password: passwordInput.value,
+        rememberMe: rememberInput.checked,
       });
       $notify.remove();
     });
@@ -187,13 +197,24 @@ const promptLogin = function promptLogin(
   crossBtn && crossBtn.addEventListener("click", $notify.remove.bind($notify));
 
   btnsWrapper.append(loginBtn);
-  formWrapper.append(
-    emailLabel,
-    emailInput,
-    passwordLabel,
-    passwordInput,
-    btnsWrapper
-  );
+  formWrapper.append(emailLabel, emailInput, passwordLabel, passwordInput);
+
+  if (options.rememberMe) {
+    rememberGroup.classList.add(CSS_.label, "remember-me");
+
+    rememberInput.type = "checkbox";
+    rememberInput.id = "login-remember-me";
+    rememberInput.classList.add(`${themePrefix}-input-checkbox`);
+
+    rememberLabel.innerHTML = options.rememberMeText || "se souvenir";
+    rememberLabel.setAttribute("for", "login-remember-me");
+
+    rememberGroup.append(rememberInput, rememberLabel);
+    formWrapper.append(rememberGroup);
+  }
+
+  formWrapper.append(btnsWrapper);
+
   $notify.append(formWrapper);
 
   return $notify;

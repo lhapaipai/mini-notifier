@@ -83,9 +83,10 @@
     document.querySelector('#notification-9').addEventListener('click', () => {
       promptLogin('Vous avez été déconnecté, veuillez vous réidentifier', {
         position: 'top-right',
-        okHandler: (payload) => {
+        loginHandler: (payload) => {
           console.log(payload);
-        }
+        },
+        rememberMe: true,
       });
     });
   </script>

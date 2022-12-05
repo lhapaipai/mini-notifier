@@ -54,7 +54,12 @@ notify('hello world', {
 });
 
 promptLogin('Login box', {
-  okHandler: ({email, password}) => console.log('your email:', email, 'your password', password)
+  loginText: 'Connectez-vous',
+  emailText: 'Votre email',
+  passwordText: 'Votre mot de passe',
+  loginHandler: ({email, password}) => console.log('your email:', email, 'your password', password),
+  rememberMe: true,
+  rememberMeText: 'se souvenir'
 })
 
 configure({
